@@ -1,0 +1,25 @@
+header, main, footer { padding-left: 240px; }
+
+@media only screen and (max-width: 992px) {
+    header, main, footer {
+        padding-left: 0;
+    }
+}
+
+html {
+	font-family: Roboto, Noto Sans CJK SC, sans-serif;
+}
+
+body {
+    background-color:#fcfcfc;
+}
+
+.crop-width {
+	max-height: 100%;
+	width: auto;
+}
+
+.crop-height {
+	max-width: 100%;
+	height: auto;
+}
