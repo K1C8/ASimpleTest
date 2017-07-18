@@ -1,5 +1,6 @@
 package com.test.web;
 
+import com.test.model.TradeXML;
 import com.test.util.XMLStorDiskUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,9 +35,9 @@ public class XMLEdit {
         String webappRoot = request.getSession().getServletContext().getRealPath("/static");
         XMLStorDiskUtil XMLStorDiskUtil = new XMLStorDiskUtil(webappRoot);
         logger.debug(TAG + ": Directory " + XMLStorDiskUtil.getDirectory() + " is being processed.");
-        ArrayList<String> strings = XMLStorDiskUtil.getFileList();
+        ArrayList<TradeXML> xmls = XMLStorDiskUtil.getFileList();
 
-        model.put("xmlList", strings);
+        model.put("xmlList", xmls);
         return "xml-edit";
     }
 }

@@ -18,6 +18,8 @@ public class TradeXML {
 
     private String tradeXMLContent;
 
+    private String tradeFlowID;
+
     @Nullable
     private String filePath;
 
@@ -71,6 +73,14 @@ public class TradeXML {
         this.tradeXMLContent = tradeXMLContent;
     }
 
+    public String getTradeFlowID() {
+        return tradeFlowID;
+    }
+
+    public void setTradeFlowID(String tradeFlowID) {
+        this.tradeFlowID = tradeFlowID;
+    }
+
     public String getFilePath() {
         return filePath;
     }
@@ -78,4 +88,5 @@ public class TradeXML {
     public void setFilePath(String filePath) {
         this.filePath = filePath;
     }
+
 }

@@ -1,6 +1,7 @@
 package com.test.util;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.test.interfaces.XMLStorUtil;
 import com.test.model.TradeXML;
 import org.apache.commons.io.FileUtils;
@@ -10,6 +11,7 @@ import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 /**
@@ -64,51 +66,51 @@ public class XMLStorDiskUtil implements XMLStorUtil {
         return null;
     }
 
-    public ArrayList<String> getFileList() {
-        ArrayList<String> list = new ArrayList<>();
-        list.add("SHIROU_CHIKAN!!!");
-        if (directory.length() < 1) {
-            logger.error("A blank directory was set as directory to get XML files.");
-            return null;
-        }
-        File dirFile;
-        File[] files;
-        int mid;
-        String fileNameExt;
-        try {
-            logger.error("Directory " + directory + " is being processed.");
-            dirFile = new File(directory);
-            tradeXMLs = test(directory);
-            int filesCount = dirFile.listFiles().length;
-            files = dirFile.listFiles();
-            for (File file : files) {
-                logger.debug("Trying to open file " + file.getAbsolutePath());
-                if (!file.isFile())
-                    continue;
-                mid = file.getName().lastIndexOf(".");
-                if (mid < 0)
-                    continue;
-                else {
-                    fileNameExt = file.getName().substring(mid + 1);
-                }
-                if (fileNameExt.equals("xml")) {
-                    String tmpString = readFile(file);
-                    tmpString = tmpString.substring(0, 12);
-                    list.add(tmpString);
-                }
-            }
-            for (TradeXML xml: tradeXMLs) {
-                list.add(xml.getBranchID());
-            }
-        } catch (Exception e) {
-            logger.error(TAG + " exception catched: " + e.toString());
-        }
+//    public ArrayList<String> getFileList() {
+//        ArrayList<String> list = new ArrayList<>();
+//        list.add("SHIROU_CHIKAN!!!");
+//        if (directory.length() < 1) {
+//            logger.error("A blank directory was set as directory to get XML files.");
+//            return null;
+//        }
+//        File dirFile;
+//        File[] files;
+//        int mid;
+//        String fileNameExt;
+//        try {
+//            logger.error("Directory " + directory + " is being processed.");
+//            dirFile = new File(directory);
+//            tradeXMLs = getTradeXMLs(directory);
+//            int filesCount = dirFile.listFiles().length;
+//            files = dirFile.listFiles();
+//            for (File file : files) {
+//                logger.debug("Trying to open file " + file.getAbsolutePath());
+//                if (!file.isFile())
+//                    continue;
+//                mid = file.getName().lastIndexOf(".");
+//                if (mid < 0)
+//                    continue;
+//                else {
+//                    fileNameExt = file.getName().substring(mid + 1);
+//                }
+//                if (fileNameExt.equals("xml")) {
+//                    String tmpString = readFile(file);
+//                    tmpString = tmpString.substring(0, 12);
+//                    list.add(tmpString);
+//                }
+//            }
+//            for (TradeXML xml: tradeXMLs) {
+//                list.add(xml.getBranchID());
+//            }
+//        } catch (Exception e) {
+//            logger.error(TAG + " exception catched: " + e.toString());
+//        }
+//
+//        return list;
+//    }
 
-        return list;
-    }
-
-    public TradeXML[] test(String path){
-        path += "/file_index.json";
+    public ArrayList<TradeXML> getFileList(){
+        String path = directory + "/file_index.json";
         String fileDescrptr = null;
         File file = new File(path);
         try {
@@ -118,11 +120,13 @@ public class XMLStorDiskUtil implements XMLStorUtil {
             return null;
         }
         Gson gson = new Gson();
-        TradeXML[] xmls = null;
+        ArrayList<TradeXML> xmlArrayList = new ArrayList<>();
         if (null != fileDescrptr) {
-            xmls = gson.fromJson(fileDescrptr, TradeXML[].class);
+            Type collectionType = new TypeToken<ArrayList<TradeXML>>(){}.getType();
+            xmlArrayList = gson.fromJson(fileDescrptr, collectionType);
             logger.debug(TAG + " successfully populated TradeXMLs from disk file.");
-            return xmls;
+
+            return xmlArrayList;
         } else {
             logger.warn(TAG + " read file descriptor failed.");
             return null;

@@ -109,10 +109,10 @@
                 <c:forEach items="${xmlList}" var="xmls">
                     <tr>
                         <td><a href="#!row2-edit" class="waves-effect"><i class="material-icons left">edit</i></a></td>
-                        <td>Card TITLE</td>
-                        <td><c:out value="${xmls.toString()}"/></td>
-                        <td></td>
-                        <td></td>
+                        <td><c:out value="${xmls.getTradeID()}"/></td>
+                        <td><c:out value="${xmls.getBranchID()}"/></td>
+                        <td><c:out value="${xmls.getInputDate()}"/></td>
+                        <td><c:out value="${xmls.getBranchID()}"/></td>
                     </tr>
                 </c:forEach>
                 <tr>

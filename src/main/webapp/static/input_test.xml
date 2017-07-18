@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<tradeXML branchID="462000" tradeID="21011" tradeXMLSerial="1">
+	<ap>
+		<OpCode>41011</OpCode>
+		<ReqId>110000010</ReqId>
+		<OpNo>BB046</OpNo>
+		<Business>
+			<lc_no>529LC1500200011D</lc_no>
+			<rece_date>20170121</rece_date>
+			<remarks>ABCCBAABABCACABBCA</remarks>
+		</Business>
+	</ap>
+</tradeXML>

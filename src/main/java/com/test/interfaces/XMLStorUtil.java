@@ -21,6 +21,6 @@ public interface XMLStorUtil {
     //findByTradeXMLSerial
     ArrayList<TradeXML> findBySerial();
 
-    ArrayList<String> getFileList();
+    ArrayList<TradeXML> getFileList();
 
 }
